@@ -6,10 +6,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
-@Table(name = "usuario")
+@Table(name = "funcionario")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Funcionario {
@@ -18,12 +20,12 @@ public class Funcionario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
+    private String email;
 
     private String password;
 
-    private String email;
-
     private String name;
 
+    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<RegistroPonto> pontosRegistrados;
 }

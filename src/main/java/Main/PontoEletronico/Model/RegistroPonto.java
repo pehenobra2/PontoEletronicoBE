@@ -20,11 +20,14 @@ public class RegistroPonto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long funcionario_id;
-
+    @Enumerated(EnumType.STRING)
     private TipoPonto tipo;
 
     private LocalDateTime dateTime;
 
     private String foto;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "funcionario_id", referencedColumnName = "id")
+    private Funcionario funcionario;
 }
