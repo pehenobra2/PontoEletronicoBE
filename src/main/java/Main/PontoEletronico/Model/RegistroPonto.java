@@ -1,5 +1,7 @@
 package Main.PontoEletronico.Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,11 +25,11 @@ public class RegistroPonto {
     @Enumerated(EnumType.STRING)
     private TipoPonto tipo;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yy - HH:mm")
     private LocalDateTime dateTime;
-
-    private String foto;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "funcionario_id", referencedColumnName = "id")
+    @JsonIgnore
     private Funcionario funcionario;
 }

@@ -1,14 +1,15 @@
 package Main.PontoEletronico.DTO;
 
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public record CadastroFuncionarioDTO(
 
         @NotBlank(message = "O email é obrigatório")
-        @Email(message = "Email inválido")
+        @Pattern(
+                regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$",
+                message = "Email inválido"
+        )
         String email,
 
         @NotBlank(message = "A senha é obrigatória")
@@ -16,6 +17,9 @@ public record CadastroFuncionarioDTO(
         String password,
 
         @NotBlank(message = "O nome é obrigatório")
-        String name
+        String name,
+
+        @NotNull
+        Long empresa_id
 ) {
 }
